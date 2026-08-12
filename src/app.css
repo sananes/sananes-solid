@@ -1,0 +1,39 @@
+/* The styles system (Tailwind defaults, reset, dr-* utilities, theme tokens).
+ * It curates the --color-* and --font-* namespaces, so the app palette below
+ * lands on top of it rather than wiping again. */
+@import "./styles/css/index.css";
+
+/* What Tailwind scans for class names. Automatic detection is off (see
+ * index.css), so this is the whole list. The exclusions keep class names quoted
+ * in the styles system's docs and generator templates out of the bundle. */
+@source "./";
+@source not "./styles/scripts";
+@source not "./styles/**/*.md";
+
+/* @theme {
+  --color-background: #fafafa;
+  --color-foreground: #000000;
+  --color-subdued: #666666;
+  --color-muted: #999999;
+  --color-accent: #000000;
+  --color-border: #e0e0e0;
+  --color-border-hover: #c3c3c3;
+
+  --font-pixel: "Geist Pixel", sans-serif;
+  --font-sans: "Geist Variable", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+} */
+
+/* The reset replaces Tailwind's preflight, which is what used to set the
+ * document font. Without this the page falls back to the UA serif. */
+html {
+  font-family: var(--font-sans);
+}
+
+@utility font-body {
+  @apply text-sm font-medium;
+}
+
+@utility font-overline {
+  @apply text-sm font-medium text-muted;
+}

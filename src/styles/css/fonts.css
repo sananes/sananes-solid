@@ -1,0 +1,15 @@
+/*
+ * FONTS CSS FILE — family custom properties.
+ *
+ * `next/font` used to inject `--next-font-*` custom properties onto <html>.
+ * On Vite we register the faces in the entry (import '@fontsource-variable/...')
+ * and expose the families here as `--font-family-*`. `typography.ts` points at
+ * these names; the generator maps them onto Tailwind's `--font-display` /
+ * `--font-mono` theme tokens. Keep these stacks in sync with `fonts.ts`.
+ */
+:root {
+  --font-family-display: "Geist Variable", system-ui, -apple-system, sans-serif;
+  --font-family-sans: "Geist Variable", system-ui, -apple-system, sans-serif;
+  --font-family-pixel: "Geist Pixel", sans-serif;
+  --font-family-mono: "Geist Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+}

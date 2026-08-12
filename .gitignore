@@ -1,0 +1,10 @@
+.env
+!.env.example
+.vinxi/
+node_modules/
+.output/
+dist/
+.nitro/
+.DS_Store
+*.local
+app.config.timestamp_*.js
