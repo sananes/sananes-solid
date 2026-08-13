@@ -8,3 +8,8 @@ dist/
 .DS_Store
 *.local
 app.config.timestamp_*.js
+
+# Sanity Studio. `schema.json` is an intermediate artifact of schema
+# extraction; the types it produces are committed instead.
+studio/schema.json
+studio/.sanity/

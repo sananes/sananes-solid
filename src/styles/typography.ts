@@ -1,13 +1,8 @@
-const fonts = {
-  display: "--font-family-display",
-  sans: "--font-family-sans",
-  pixel: "--font-family-pixel",
-  mono: "--font-family-mono", // CSS var registered in css/fonts.css (see fonts.ts for the JS-side stacks)
-} as const
+import { fontVariables } from "./fonts"
 
 const typography: TypeStyles = {
   h1: {
-    "font-family": `var(${fonts.display})`,
+    "font-family": `var(${fontVariables.display})`,
     "font-style": "normal",
     "font-weight": 700,
     "line-height": "80%",
@@ -15,7 +10,7 @@ const typography: TypeStyles = {
     "font-size": { mobile: 72, desktop: 120 },
   },
   h2: {
-    "font-family": `var(${fonts.display})`,
+    "font-family": `var(${fontVariables.display})`,
     "font-style": "normal",
     "font-weight": 700,
     "line-height": "80%",
@@ -23,7 +18,7 @@ const typography: TypeStyles = {
     "font-size": { mobile: 32, desktop: 48 },
   },
   "p-big": {
-    "font-family": `var(${fonts.mono})`,
+    "font-family": `var(${fontVariables.mono})`,
     "font-style": "normal",
     "font-weight": 400,
     "line-height": "125%",
@@ -31,7 +26,7 @@ const typography: TypeStyles = {
     "font-size": { mobile: 16, desktop: 20 },
   },
   p: {
-    "font-family": `var(${fonts.mono})`,
+    "font-family": `var(${fontVariables.mono})`,
     "font-style": "normal",
     "font-weight": 400,
     "line-height": { mobile: "125%", desktop: "120%" },
@@ -39,7 +34,7 @@ const typography: TypeStyles = {
     "font-size": { mobile: 12, desktop: 14 },
   },
   caption: {
-    "font-family": `var(${fonts.mono})`,
+    "font-family": `var(${fontVariables.mono})`,
     "font-style": "normal",
     "font-weight": 400,
     "line-height": { mobile: "125%", desktop: "120%" },
@@ -47,7 +42,7 @@ const typography: TypeStyles = {
     "font-size": { mobile: 8, desktop: 10 },
   },
   cta: {
-    "font-family": `var(${fonts.mono})`,
+    "font-family": `var(${fontVariables.mono})`,
     "font-style": "normal",
     "font-weight": 400,
     "line-height": "100%",
@@ -55,7 +50,7 @@ const typography: TypeStyles = {
     "font-size": { mobile: 12, desktop: 14 },
   },
   link: {
-    "font-family": `var(${fonts.mono})`,
+    "font-family": `var(${fontVariables.mono})`,
     "font-style": "normal",
     "font-weight": 400,
     "line-height": { mobile: "125%", desktop: "120%" },
@@ -64,7 +59,7 @@ const typography: TypeStyles = {
   },
 } as const
 
-export { fonts, typography }
+export { typography }
 
 // UTIL TYPES
 // The Next original typed these off React's `CSSProperties`. React is not a

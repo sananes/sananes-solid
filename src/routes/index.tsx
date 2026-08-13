@@ -1,7 +1,7 @@
 import { For } from "solid-js"
 import ScrambleText from "~/components/scramble-text"
 import Typewriter from "~/components/typewriter"
-import UnicornStudio from "~/components/unicorn-studio"
+import UnicornStudio from "~/integrations/unicorn-studio"
 
 const CAREER = [
   {

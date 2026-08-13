@@ -8,7 +8,7 @@ element, keeps that scene in sync with its props, and destroys it on unmount.
 ## Usage
 
 ```tsx
-import UnicornStudio from "~/components/unicorn-studio"
+import UnicornStudio from "~/integrations/unicorn-studio"
 
 export default function Page() {
   return <UnicornStudio projectId="your-project-id" width="100%" height="100%" />
@@ -100,7 +100,7 @@ Under a strict `style-src` CSP, or if you would rather own the rules, opt out be
 the first render and add `UNICORN_STUDIO_CSS` to your own stylesheet:
 
 ```ts
-import { setStyleInjection, UNICORN_STUDIO_CSS } from "~/components/unicorn-studio"
+import { setStyleInjection, UNICORN_STUDIO_CSS } from "~/integrations/unicorn-studio"
 
 setStyleInjection(false)
 ```
@@ -120,7 +120,7 @@ console instead of failing silently. `fallback` renders in place of the scene:
 is idempotent, shared across callers, and bounded by a timeout:
 
 ```ts
-import { loadUnicornStudio } from "~/components/unicorn-studio"
+import { loadUnicornStudio } from "~/integrations/unicorn-studio"
 
 const runtime = await loadUnicornStudio({ scriptUrl: "/vendor/unicornStudio.umd.js" })
 ```

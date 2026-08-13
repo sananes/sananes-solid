@@ -1,4 +1,4 @@
-# Howl
+# Howler
 
 A SolidJS wrapper around [howler.js](https://howlerjs.com) core.
 
@@ -9,7 +9,7 @@ module evaluate time, so SSR and unused routes stay silent.
 ## Usage
 
 ```tsx
-import { createHowl, defineHowls, howl, HowlToggle } from "~/components/howl"
+import { createHowl, defineHowls, howl, HowlToggle } from "~/integrations/howler"
 
 const sfx = defineHowls({
   click: { src: "/sounds/click.webm" },
@@ -143,7 +143,7 @@ styles win. Under a strict `style-src` CSP, opt out before the first render
 and add `HOWL_TOGGLE_CSS` to your own stylesheet:
 
 ```ts
-import { HOWL_TOGGLE_CSS, setStyleInjection } from "~/components/howl"
+import { HOWL_TOGGLE_CSS, setStyleInjection } from "~/integrations/howler"
 
 setStyleInjection(false)
 ```
@@ -157,7 +157,7 @@ Any other button prop — `id`, `class`, `aria-*`, `onClick` — is forwarded.
 callers, and loads `howler/src/howler.core.js` (no spatial plugin):
 
 ```ts
-import { loadHowler } from "~/components/howl"
+import { loadHowler } from "~/integrations/howler"
 
 const { Howl, Howler } = await loadHowler()
 ```

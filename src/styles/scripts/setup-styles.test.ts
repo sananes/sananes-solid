@@ -1,12 +1,11 @@
 /**
- * Guards the generated stylesheets against drift.
+ * Guards generated stylesheets against drift.
  *
- * `src/styles/css/tailwind.css` and `root.css` are produced from the palette in
- * `colors.ts` and the rest of `src/styles/config.ts`. Editing a color without
- * re-running `setup:styles` leaves the CSS stale, and nothing else in the
- * pipeline notices: the app keeps compiling and every theme keeps rendering the
- * previous palette. These tests rebuild in memory and compare against what is
- * committed, so the drift fails here instead of shipping.
+ * `tailwind.css`, `root.css`, `fonts.css`, and `font-preloads.ts` are produced
+ * from `src/styles/config.ts` / `fonts.ts`. Editing a color or font without
+ * re-running `setup:styles` leaves the output stale. These tests rebuild in
+ * memory and compare against what is committed, so the drift fails here
+ * instead of shipping.
  *
  * On failure: run `bun run setup:styles` and commit the regenerated files.
  *
@@ -41,6 +40,14 @@ describe("generated stylesheets", () => {
 
   it("root.css matches a fresh build of the current config", async () => {
     expect(readCommitted(OUTPUTS.root)).toBe(built.root)
+  })
+
+  it("fonts.css matches a fresh build of the current config", async () => {
+    expect(readCommitted(OUTPUTS.fonts)).toBe(built.fonts)
+  })
+
+  it("font-preloads.ts matches a fresh build of the current config", async () => {
+    expect(readCommitted(OUTPUTS.fontPreloads)).toBe(built.fontPreloads)
   })
 
   it("emits every palette entry and theme as a custom property", () => {

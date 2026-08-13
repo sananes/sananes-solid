@@ -1,6 +1,9 @@
 import { colors, themeNames, themes } from "./colors"
+import { fontVariables } from "./fonts"
 import { breakpoints, customSizes, layout, screens } from "./layout.mjs"
-import { fonts, typography } from "./typography"
+import { typography } from "./typography"
+
+const fonts = fontVariables
 
 const config = {
   colors,

@@ -3,7 +3,7 @@
  * evaluate time and needs an AudioContext, so every test injects a stub via
  * `setHowlerLoader`.
  *
- * Run with: bun test src/components/howl
+ * Run with: bun test src/integrations/howler
  */
 
 import { afterEach, beforeEach, describe, expect, it } from "bun:test"

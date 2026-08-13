@@ -1,0 +1,6 @@
+export type { SmoothScrollProps } from "./component"
+export { SmoothScroll } from "./component"
+export { getLenisConstructor, loadLenis, resetLoader, setLenisLoader } from "./loader"
+export { destroySmoothScroll, getLenis, initSmoothScroll } from "./smooth-scroll"
+export { ensureStyles, LENIS_CSS, setStyleInjection } from "./styles"
+export type { LenisInstance, LenisOptions, SmoothScrollOptions } from "./types"

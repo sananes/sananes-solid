@@ -1,0 +1,3 @@
+# Applies to every `bun` and `bunx` invocation in this workspace, so the Sanity
+# CLI's Vite toolchain can start under Bun. See scripts/bun-compat.mjs.
+preload = ["./scripts/bun-compat.mjs"]

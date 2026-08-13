@@ -7,7 +7,15 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!src/styles/css/root.css", "!src/styles/css/tailwind.css"]
+    "includes": [
+      "**",
+      "!src/styles/css/root.css",
+      "!src/styles/css/tailwind.css",
+      "!src/styles/css/fonts.css",
+      "!src/styles/font-preloads.ts",
+      "!src/integrations/sanity/sanity.types.ts",
+      "!studio/schema.json"
+    ]
   },
   "formatter": {
     "enabled": true,

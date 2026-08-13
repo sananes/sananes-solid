@@ -5,10 +5,11 @@
 
 /* What Tailwind scans for class names. Automatic detection is off (see
  * index.css), so this is the whole list. The exclusions keep class names quoted
- * in the styles system's docs and generator templates out of the bundle. */
+ * in module docs and generator templates out of the bundle — every opt-in module
+ * has a colocated README full of example markup. */
 @source "./";
 @source not "./styles/scripts";
-@source not "./styles/**/*.md";
+@source not "./**/*.md";
 
 /* @theme {
   --color-background: #fafafa;

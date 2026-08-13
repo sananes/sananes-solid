@@ -1,49 +1,88 @@
 /**
- * Fonts (SolidStart / Vite)
+ * Fonts — single source of truth for family stacks.
  *
- * The original starter loaded fonts through `next/font/google`, which is a
- * Next-only build-time loader. SolidStart runs on Vite, so the faces come from
- * Fontsource *variable* packages instead — one file per family covers every
- * weight, like the `next/font` variable-axis loading it replaces.
+ * Define a role here (`display`, `sans`, …) and `setup:styles` injects it:
+ *   1. `@font-face` / Fontsource `@import`s into `css/fonts.css`
+ *   2. latin woff2 `<link rel="preload">` hrefs into `font-preloads.ts`
  *
- * The families are this project's own (Geist / Geist Mono), not the starter's
- * Oswald / Spline Sans Mono: the type scale is what was ported, not the
- * typefaces.
- *
- * Two steps, mirroring how `next/font` worked:
- *   1. Register the font faces — import the Fontsource CSS once in your entry
- *      (see `src/app.tsx`):
- *          import '@fontsource-variable/geist/wght.css'
- *          import '@fontsource-variable/geist-mono/wght.css'
- *   2. Expose them as CSS custom properties — done in `css/fonts.css`, which
- *      sets `--font-family-display` / `--font-family-mono` on `:root`. Those are
- *      the variables `typography.ts` points at and that the generator turns into
- *      Tailwind's `--font-display` / `--font-mono` theme tokens.
- *
- * This module is the JS-side source of truth for the family stacks, so app code
- * and the CSS layer can't drift. It intentionally does not import the Fontsource
- * packages itself (importing font CSS from a `.ts` barrel would pull it into
- * every consumer); registration stays an explicit entry-point import.
+ * Fontsource vs custom is discriminated by `fontsource` vs `src`. Variable vs
+ * static is the package scope (`@fontsource-variable/` vs `@fontsource/`) or,
+ * for custom files, a string `src` (variable) vs a weight map (static).
+ * Weights default to whatever `typography.ts` uses for that role's CSS var.
  */
 
-/** CSS custom-property names the font faces are published under (see fonts.css). */
-export const fontVariables = {
-  display: "--font-family-display",
-  sans: "--font-family-sans",
-  pixel: "--font-family-pixel",
-  mono: "--font-family-mono",
-} as const
+export const FONT_WEIGHTS = [100, 200, 300, 400, 500, 600, 700, 800, 900] as const
+export type FontWeight = (typeof FONT_WEIGHTS)[number]
+
+export type FontsourcePackage = `@fontsource/${string}` | `@fontsource-variable/${string}`
+
+type FontBase = {
+  family: string
+  fallbacks: readonly [string, ...string[]]
+  /** Pin faces explicitly. Omit to collect weights from `typography.ts`. */
+  weights?: readonly FontWeight[]
+}
+
+export type FontsourceDef = FontBase & {
+  fontsource: FontsourcePackage
+}
+
+export type CustomFontSrc = string | Partial<Record<FontWeight, string>>
+
+export type CustomFontDef = FontBase & {
+  src: CustomFontSrc
+  display?: "auto" | "block" | "swap" | "fallback" | "optional"
+}
+
+export type FontDef = FontsourceDef | CustomFontDef
+
+export function isFontsourceDef(def: FontDef): def is FontsourceDef {
+  return "fontsource" in def
+}
+
+export function isVariableFontsource(pkg: string): boolean {
+  return pkg.startsWith("@fontsource-variable/")
+}
+
+/** CSS `font-family` stack for a role, including quoted family + fallbacks. */
+export function fontStack(def: FontDef): string {
+  return [`"${def.family}"`, ...def.fallbacks].join(", ")
+}
+
+export const fonts = {
+  display: {
+    family: "Geist Variable",
+    fontsource: "@fontsource-variable/geist",
+    fallbacks: ["system-ui", "-apple-system", "sans-serif"],
+  },
+  sans: {
+    family: "Geist Variable",
+    fontsource: "@fontsource-variable/geist",
+    fallbacks: ["system-ui", "-apple-system", "sans-serif"],
+  },
+  pixel: {
+    family: "Geist Pixel",
+    fontsource: "@fontsource/geist-pixel",
+    fallbacks: ["sans-serif"],
+  },
+  mono: {
+    family: "Geist Mono Variable",
+    fontsource: "@fontsource-variable/geist-mono",
+    fallbacks: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+  },
+} as const satisfies Record<string, FontDef>
+
+export type FontRole = keyof typeof fonts
+
+/** CSS custom-property names the font faces are published under. */
+export const fontVariables = Object.fromEntries(
+  Object.keys(fonts).map((role) => [role, `--font-family-${role}`]),
+) as { [K in FontRole]: `--font-family-${K}` }
 
 /**
- * Resolved family stacks. Kept in sync with `css/fonts.css`; exported so a
- * component can read a stack in JS (e.g. a canvas `ctx.font`) without hardcoding
- * it.
+ * Resolved family stacks. Exported so a component can read a stack in JS
+ * (e.g. a canvas `ctx.font`) without hardcoding it.
  */
-export const fontStacks = {
-  display: `"Geist Variable", system-ui, -apple-system, sans-serif`,
-  sans: `"Geist Variable", system-ui, -apple-system, sans-serif`,
-  pixel: `"Geist Pixel", sans-serif`,
-  mono: `"Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace`,
-} as const
-
-export type FontRole = keyof typeof fontStacks
+export const fontStacks = Object.fromEntries(
+  Object.entries(fonts).map(([role, def]) => [role, fontStack(def)]),
+) as { [K in FontRole]: string }

@@ -1,10 +1,9 @@
 import { Router } from "@solidjs/router"
 import { FileRoutes } from "@solidjs/start/router"
 import { Suspense } from "solid-js"
+import { StatsOverlay } from "~/dev/stats"
+import { SmoothScroll } from "~/integrations/motion/lenis"
 import { Theme } from "~/styles"
-import "@fontsource-variable/geist/wght.css"
-import "@fontsource/geist-pixel"
-import "@fontsource-variable/geist-mono/wght.css"
 import "./app.css"
 
 export default function App() {
@@ -12,6 +11,8 @@ export default function App() {
     <Router
       root={(props) => (
         <Theme theme="dark" global>
+          <SmoothScroll />
+          {import.meta.env.DEV && <StatsOverlay />}
           <Suspense>{props.children}</Suspense>
         </Theme>
       )}
