@@ -1,28 +1,14 @@
 import { A } from "@solidjs/router"
+import { SectionHeading } from "~/components/ui"
 
 export default function NotFound() {
   return (
-    <main class="text-center mx-auto text-gray-700 p-4">
-      <h1 class="max-6-xs text-6xl text-sky-700 font-thin uppercase my-16">Not Found</h1>
-      <p class="mt-8">
-        Visit{" "}
-        <a
-          href="https://solidjs.com"
-          target="_blank"
-          class="text-sky-600 hover:underline"
-          rel="noopener"
-        >
-          solidjs.com
-        </a>{" "}
-        to learn how to build Solid apps.
-      </p>
-      <p class="my-4">
-        <A href="/" class="text-sky-600 hover:underline">
-          Home
-        </A>
-        {" - "}
-        <A href="/about" class="text-sky-600 hover:underline">
-          About Page
+    <main class="text-subdued text-sm mx-auto flex min-h-screen max-w-105 flex-col justify-center gap-2 p-12">
+      <SectionHeading title="404" class="text-foreground" />
+      <p>That page does not exist.</p>
+      <p>
+        <A href="/" class="!text-foreground">
+          Back home
         </A>
       </p>
     </main>

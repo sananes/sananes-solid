@@ -133,4 +133,5 @@ whether or not you opt in, since it is two lines and useful without Lenis.
   server, or before the import settles — so always null-check.
 - Nothing here fixes a page that does not scroll natively. Test without Lenis
   first.
-- This module does not mount itself. Nothing in `app.tsx` references it.
+- This module does not mount itself. `app.tsx` opts in by rendering
+  `<SmoothScroll />`; remove that line and Lenis is never downloaded.

@@ -15,15 +15,17 @@ html {
 
 /*
  * Derived semantic tokens — depth, hairlines, motion.
- * Surfaces and lines are derived from the active theme's colors via color-mix,
- * so they adapt automatically across every [data-theme] without new palette
- * entries. The red `--color-contrast` doubles as the accent.
+ * Surfaces and lines are mixed from the active theme's palette rather than
+ * being palette entries of their own, so they follow every [data-theme]
+ * automatically. Every var() below must name a role that colors.ts actually
+ * emits: an unknown custom property makes the whole declaration invalid, and
+ * the element silently loses its background.
  */
 :root {
-  --surface: color-mix(in oklab, var(--color-secondary) 4%, var(--color-primary));
-  --surface-2: color-mix(in oklab, var(--color-secondary) 8%, var(--color-primary));
-  --line: color-mix(in oklab, var(--color-secondary) 14%, transparent);
-  --line-strong: color-mix(in oklab, var(--color-secondary) 28%, transparent);
+  --surface: color-mix(in oklab, var(--color-black) 4%, var(--color-white));
+  --surface-2: color-mix(in oklab, var(--color-black) 8%, var(--color-white));
+  --line: color-mix(in oklab, var(--color-black) 14%, transparent);
+  --line-strong: color-mix(in oklab, var(--color-black) 28%, transparent);
 
   --duration-fast: 200ms;
   --duration: 400ms;
@@ -42,7 +44,7 @@ html.overflow-hidden {
 body {
   min-height: 100vh;
   overscroll-behavior: none;
-  background-color: var(--color-background);
+  background-color: var(--color-white);
   color: var(--color-foreground);
   display: flex;
   flex-direction: column;
@@ -65,7 +67,7 @@ a {
 
   &:hover {
     color: var(--color-foreground);
-    text-decoration-color: var(--color-border-hover);
+    text-decoration-color: var(--color-borderHover);
   }
 }
 
@@ -100,7 +102,7 @@ svg.icon {
 
 /* Focus states */
 *:focus-visible {
-  outline: 2px solid var(--color-contrast);
+  outline: 2px solid var(--color-foreground);
   outline-offset: 2px;
   border-radius: 1px;
 }

@@ -120,4 +120,5 @@ clock, which is what makes it testable — see `sampler.test.ts`.
 - The panel's styles are self-contained rather than themed, so it stays legible
   on top of whatever it is measuring. `setStyleInjection(false)` plus
   `STATS_OVERLAY_CSS` for a strict `style-src` CSP.
-- This module does not mount itself. Nothing in `app.tsx` references it.
+- This module does not mount itself. `app.tsx` opts in behind
+  `import.meta.env.DEV`, so the overlay is dead-code-eliminated from production.

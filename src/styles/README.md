@@ -73,8 +73,8 @@ setTheme('evil')
 ```
 
 `Theme` sets `data-theme` on <html>; the generated `[data-theme=…]` blocks remap
-`--color-primary` / `--color-secondary` / `--color-contrast` per theme. Reference
-the semantic tokens — never hard-code a hex in a component.
+every role in the palette per theme. Reference the semantic tokens — never
+hard-code a hex in a component.
 
 ## Reveal on scroll
 
@@ -112,10 +112,11 @@ Layout tokens are generated into `css/root.css`. Color and font tokens are
 registered with Tailwind via `@theme` in `css/tailwind.css`. Easing tokens live
 in hand-authored `css/easings.css`; font families in hand-authored `css/fonts.css`.
 
-- **Color** — `@theme` in `css/tailwind.css` is the single source of truth for
-  the raw palette (`--color-red`, `--color-blue`, …) plus theme-aware
-  `--color-primary` / `--color-secondary` / `--color-contrast`, remapped per
-  theme (`light`, `dark`, `evil`, `red`).
+- **Color** — `colors.ts` is the source; `@theme` in `css/tailwind.css` is
+  generated from it. The roles are `--color-foreground`, `--color-subdued`,
+  `--color-muted`, `--color-black`, `--color-white`, `--color-border` and
+  `--color-borderHover`, remapped per theme (`light`, `dark`). Note the camel
+  case on the last one — it is the TypeScript key, verbatim.
 - **Easing** — `--ease-out-expo`, `--ease-in-out-cubic`, … in `css/easings.css`.
 - **Font** — `--font-family-display` / `--font-family-mono` in `css/fonts.css`,
   mapped by the generator to Tailwind's `--font-display` / `--font-mono`.

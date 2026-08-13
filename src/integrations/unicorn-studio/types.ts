@@ -45,16 +45,11 @@ export interface UnicornAddSceneOptions {
   breakpoints?: Record<string, unknown>
 }
 
+/** `Window.UnicornStudio` is declared in `src/global.d.ts` — see the note there. */
 export interface UnicornStudioGlobal {
   init(options?: { scale?: number; dpi?: number }): Promise<UnicornScene[]>
   addScene(options: UnicornAddSceneOptions): Promise<UnicornScene>
   destroy(): void
   setScroll(scrollY: number): void
   useNativeScroll(): void
-}
-
-declare global {
-  interface Window {
-    UnicornStudio?: UnicornStudioGlobal
-  }
 }

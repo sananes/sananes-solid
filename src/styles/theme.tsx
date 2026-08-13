@@ -14,9 +14,8 @@ import { type ThemeName, type Themes, themes } from "./config"
  * Theme provider — Solid port of the starter's React `<Theme>` wrapper.
  *
  * Sets `data-theme` on <html> (when `global`) so the `[data-theme=…]` blocks
- * generated into `css/tailwind.css` remap `--color-primary/secondary/contrast`.
- * The semantic tokens never change name, so components reference them the same
- * way in every theme.
+ * generated into `css/tailwind.css` remap the palette. The role names never
+ * change, so components reference them the same way in every theme.
  *
  * For a no-flash initial paint, also render the default `data-theme` on your
  * <html> in the SSR document (see `src/app.tsx`); this provider keeps it in sync

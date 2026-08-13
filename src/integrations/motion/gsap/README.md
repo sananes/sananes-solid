@@ -147,4 +147,6 @@ bundle — `../lenis` uses exactly that.
   (`scrub: true`) rather than animating the scroll position itself.
 - Register plugins through `loadGsap`, not `gsap.registerPlugin`, so the
   once-only bookkeeping stays in one place.
-- This module does not mount itself. Nothing in `app.tsx` references it.
+- This module does not mount itself, and no app code imports it — but the Lenis
+  module loads GSAP and ScrollTrigger at runtime unless `<SmoothScroll />` is
+  given `syncScrollTrigger={false}`.

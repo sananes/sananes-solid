@@ -7,7 +7,8 @@ SolidStart (v2) static site — pure SSG, Bun, Biome, Tailwind CSS v4.
 - **SolidStart 2** with Nitro `static` preset + link crawling prerender
 - **Bun** as package manager / runtime
 - **Biome** for lint + format
-- **Tailwind CSS v4** via `@tailwindcss/vite`
+- **Tailwind CSS v4** via PostCSS, not the Vite plugin — the `columns()` and
+  `*-vw()` functions have to run after Tailwind (see `vite.config.ts`)
 
 ## Scripts
 
@@ -25,10 +26,13 @@ bun run format     # format with biome
 
 ## Opt-in modules
 
-Everything below ships **nothing** until you import it. Nothing is referenced
-from `src/app.tsx`, every external library is dynamically imported on mount, and
-each module carries its own README, tests, and CSP escape hatch. Delete any of
-them and the rest still builds.
+Everything below ships **nothing** until you import it. Every external library is
+dynamically imported on mount, and each module carries its own README, tests, and
+CSP escape hatch. Delete any of them and the rest still builds.
+
+This site opts into three of them: `app.tsx` mounts `SmoothScroll` and, behind
+`import.meta.env.DEV`, the stats overlay; the homepage mounts a Unicorn Studio
+scene. The rest are unreferenced.
 
 | Module | What it gives you | Docs |
 |---|---|---|
@@ -47,12 +51,19 @@ enters this bundle — see [its README](studio/README.md).
 
 ```
 src/
-  routes/           file routes
-  components/       app UI
+  routes/           file routes — containers, compose sections
+  features/         one folder per section of the site
+  components/       layout shells, ui primitives, text effects
+  content/          the site's copy and lists, typed
+  lib/              pure helpers
   styles/           the design system
   dev/              tooling that never ships to a visitor
   integrations/     one folder per third-party SDK
 ```
+
+The import rules between those, and where a new file belongs, are in
+[ARCHITECTURE.md](ARCHITECTURE.md). They are enforced by
+[src/architecture.test.ts](src/architecture.test.ts) rather than by convention.
 
 `dev/` is for instrumentation and debugging aids, which are guarded by
 `import.meta.env.DEV` at the call site and dead-code-eliminated from production.

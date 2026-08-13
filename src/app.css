@@ -11,20 +11,6 @@
 @source not "./styles/scripts";
 @source not "./**/*.md";
 
-/* @theme {
-  --color-background: #fafafa;
-  --color-foreground: #000000;
-  --color-subdued: #666666;
-  --color-muted: #999999;
-  --color-accent: #000000;
-  --color-border: #e0e0e0;
-  --color-border-hover: #c3c3c3;
-
-  --font-pixel: "Geist Pixel", sans-serif;
-  --font-sans: "Geist Variable", sans-serif;
-  --font-mono: "Geist Mono", monospace;
-} */
-
 /* The reset replaces Tailwind's preflight, which is what used to set the
  * document font. Without this the page falls back to the UA serif. */
 html {

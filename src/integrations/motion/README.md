@@ -9,7 +9,9 @@ smooth scroll, and one shared animation loop underneath both.
 | `lenis/` | Smooth scroll, wired to ScrollTrigger | [README](./lenis/README.md) |
 | `ticker.ts` | The single `requestAnimationFrame` loop | below |
 
-Nothing here ships until you import it, and nothing in `app.tsx` references it.
+Nothing here ships until you import it. `app.tsx` opts into Lenis by rendering
+`<SmoothScroll />`, which pulls in GSAP and ScrollTrigger through its default
+`syncScrollTrigger: true`.
 Both libraries are dynamically imported on mount, so they stay out of the initial
 bundle and never evaluate during SSR.
 
